@@ -1,5 +1,8 @@
 # Fitness Tracker
 
+heroku: https://murphyworkout.herokuapp.com/exercise?id=6052776c2b9b1a00159ae570
+git: https://github.com/jmurphy0/workoutTracker.git
+
 # Table of Contents
 
 - [Author](##Author)
