@@ -11,13 +11,11 @@ var db = require("../models");
 router.get("/api/workouts", (req, res) => {
   db.Workout.aggregate([
     { $addFields: { totalDuration: { $sum: `$exercises.duration` } } },
-  ]).then(
-    db.Workout.find({})
-      .then((workouts) => {
-        res.json(workouts);
-      })
-      .catch((err) => res.json(err))
-  );
+  ])
+    .then((workouts) => {
+      res.json(workouts);
+    })
+    .catch((err) => res.json(err));
 });
 //gets the workoutdata/aggregate from db for stats.html
 router.get("/api/workouts/range", (req, res) => {
@@ -42,7 +40,7 @@ router.put("/api/workouts/:id", (req, res) => {
   console.log("yoyoyoyo", req.body);
   db.Workout.findByIdAndUpdate(
     { _id: req.params.id },
-    { exercises: req.body },
+    { $push: { exercises: req.body } },
     { new: true, runValidators: true }
   ).then((workouts) => {
     res.json(workouts);
